@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id')->index()->unsigned();
             $table->string('product_name');
             $table->double('product_price');
-            $table->bigIncrements('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
 
             // foreign key
