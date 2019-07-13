@@ -16,15 +16,14 @@
             @foreach ($products as $product)
             <div class="card mt-3" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">{{$product->product_name}}</h5>
+                  <h5 class="card-title">
+                    {{$product->product_name}}
+                    <a href="{{action('ProductController@edit', $product->id) }}" class="btn">Edit</a>
+                  </h5>
                   <p class="card-text">Product Price : RM{{$product->product_price}}</p>
                 </div>
             </div>
             @endforeach
-
-
-
-
         </div>
     </div>
 </div>

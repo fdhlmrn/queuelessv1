@@ -65,9 +65,10 @@ class ProductController extends Controller
      * @param  \App\products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(products $products)
+    public function edit(product $product)
     {
-        //
+        $product = Product::findOrFail($product->id);
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -77,9 +78,12 @@ class ProductController extends Controller
      * @param  \App\products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, products $products)
+    public function update(Request $request, product $product)
     {
-        //
+        $product->product_name = $request->product_name;
+        $product->product_price = $request->product_price;
+        $product->save();
+        return redirect('product');
     }
 
     /**
