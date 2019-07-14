@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,8 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('product.home', compact('products'));
+        // Web controller
+        // $products = Product::all();
+        // return view('product.home', compact('products'));
+
+        // API controller
+        return Product::all();
     }
 
     /**
@@ -37,14 +40,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $product = new Product;
-        $product->product_name = $request->product_name;
-        $product->product_price = $request->product_price;
-        $product->user_id = Auth::user()->id;
-        $product->save();
+        // Web controller
+        // $product = new Product;
+        // $product->product_name = $request->product_name;
+        // $product->product_price = $request->product_price;
+        // $product->user_id = Auth::user()->id;
+        // $product->save();
 
-        return redirect('product');
+        // return redirect('product');
+
+        // API Controller
+        return Product::create($request->all());
 
     }
 
@@ -54,9 +60,10 @@ class ProductController extends Controller
      * @param  \App\products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(products $products)
+    public function show(product $product)
     {
-        //
+        // API Controller
+        return Product::find($product->id);
     }
 
     /**
@@ -67,6 +74,7 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
+        // Web Controller
         $product = Product::findOrFail($product->id);
         return view('product.edit', compact('product'));
     }
@@ -80,10 +88,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        $product->product_name = $request->product_name;
-        $product->product_price = $request->product_price;
-        $product->save();
-        return redirect('product');
+        // Web Controller
+        // $product->product_name = $request->product_name;
+        // $product->product_price = $request->product_price;
+        // $product->save();
+        // return redirect('product');
+
+        // API Controller
+        $product = Product::findOrFail($product->id);
+        $product->update($request->all());
+
+        return $product;
     }
 
     /**
@@ -92,8 +107,17 @@ class ProductController extends Controller
      * @param  \App\products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(products $products)
+    public function destroy(product $product)
     {
-        //
+        // Web Controller
+        // $product = Product::findOrFail($product->id);
+        // $product->delete();
+        // return redirect('product');
+
+        // API Controller
+        $product = Product::findOrFail($product->id);
+        $product->delete();
+
+        return 204;
     }
 }

@@ -8,7 +8,7 @@ class product extends Model
 {
     // property to insert
     protected $fillable = [
-        'product_name', 'product_price',
+        'product_name', 'product_price', 'user_id',
     ];
 
     public function user()
