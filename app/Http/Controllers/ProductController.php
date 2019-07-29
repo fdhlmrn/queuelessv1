@@ -15,11 +15,8 @@ class ProductController extends Controller
     public function index()
     {
         // Web controller
-        // $products = Product::all();
-        // return view('product.home', compact('products'));
-
-        // API controller
-        return Product::all();
+        $products = Product::paginate(10);
+        return view('product.home', compact('products'));
     }
 
     /**
@@ -41,16 +38,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // Web controller
-        // $product = new Product;
-        // $product->product_name = $request->product_name;
-        // $product->product_price = $request->product_price;
-        // $product->user_id = Auth::user()->id;
-        // $product->save();
+        $product = new Product;
+        $product->product_name = $request->product_name;
+        $product->product_price = $request->product_price;
+        $product->user_id = Auth::user()->id;
+        $product->save();
 
-        // return redirect('product');
-
-        // API Controller
-        return Product::create($request->all());
+        return redirect('product');
 
     }
 
@@ -89,16 +83,10 @@ class ProductController extends Controller
     public function update(Request $request, product $product)
     {
         // Web Controller
-        // $product->product_name = $request->product_name;
-        // $product->product_price = $request->product_price;
-        // $product->save();
-        // return redirect('product');
-
-        // API Controller
-        $product = Product::findOrFail($product->id);
-        $product->update($request->all());
-
-        return $product;
+        $product->product_name = $request->product_name;
+        $product->product_price = $request->product_price;
+        $product->save();
+        return redirect('product');
     }
 
     /**
@@ -110,14 +98,8 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         // Web Controller
-        // $product = Product::findOrFail($product->id);
-        // $product->delete();
-        // return redirect('product');
-
-        // API Controller
         $product = Product::findOrFail($product->id);
         $product->delete();
-
-        return 204;
+        return redirect('product');
     }
 }
