@@ -95,8 +95,4 @@ class ProductController extends Controller
 
         return 204;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
