@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         // Web controller
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view('product.home', compact('products'));
     }
 
