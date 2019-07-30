@@ -16,23 +16,31 @@
                     </p>
                 </div>
             </div>
-            @foreach ($products as $product)
-            <div class="card mt-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        {{$product->product_name}}
-                        <a href="{{action('ProductController@edit', $product->id) }}" class="btn">Edit</a>
-                    </h5>
-                    <p class="card-text">Product Price : RM{{$product->product_price}}</p>
-                    <form action="{{ route('product.destroy', $product->id)}}" method="post">
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                @foreach ($products as $product)
+                    <div class="card mb-2" style="width: 18rem;margin: 0 auto">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{$product->product_name}}
+                                <a href="{{action('ProductController@edit', $product->id) }}" class="btn">Edit</a>
+                            </h5>
+                            <p class="card-text">Product Price : RM{{$product->product_price}}</p>
+                            <form action="{{ route('product.destroy', $product->id)}}" method="post">
+                                @csrf
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach           
+                </div>
+                
+            <div align="centre">
+                {{ $products->links() }}
                 </div>
             </div>
-            @endforeach
             <br>
-            {{ $products->links() }}
         </div>
     </div>
 </div>
